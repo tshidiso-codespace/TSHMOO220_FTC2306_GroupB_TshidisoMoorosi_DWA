@@ -2,7 +2,7 @@
 
 /**
  * @typedef {object} Data
- * @property {Array<[string, Array<number>]>} lists - An array of lisy where each list contains a string and an array of numbers
+ * @property {Array<[string, Array<number>]>} lists - An array with a list of arrays, eachcontaining a string and an array of numbers
  */
 const data = {
 	lists: [
@@ -13,7 +13,8 @@ const data = {
 }
 
 // Only edit below
-/**kkk
+/**
+ * The array to which the numbers are moved
  * @type {Array}
  */
 let result = []
@@ -23,7 +24,7 @@ let thirdArray = data.lists[2][1]
 
 /**
  * 
- * @returns {number} returns the largest mumber of the last elements of the lists
+ * @returns {number} returns the largest number of the last elements of the lists array
  */
 const extractBiggest = () => {
     let lastValues = [
@@ -46,7 +47,7 @@ const extractBiggest = () => {
 	else {
         thirdArray.pop();
 	}
-
+console.log(typeof(Math.max(...lastValues)))
 return(Math.max(...lastValues))
 }
 
