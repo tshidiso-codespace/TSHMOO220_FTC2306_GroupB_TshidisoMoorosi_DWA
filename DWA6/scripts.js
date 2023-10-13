@@ -41,15 +41,17 @@ for (const { author, id, image, title } of matches.slice(0, BOOKS_PER_PAGE)) {
   let bookElement = createBookHtml({ author, id, image, title });
   starting.appendChild(bookElement);
 }
-
-/* The code below adds "All Genres" option to the "Genre" dropdown menu */
 itemsList.appendChild(starting);
 
+/* The code below adds "All Genres" option to the "Genre" dropdown menu */
 const genreHtml = document.createDocumentFragment();
-const firstGenreElement = document.createElement("option");
-firstGenreElement.value = "any";
-firstGenreElement.innerText = "All Genres";
-genreHtml.appendChild(firstGenreElement);
+
+function addAllGenresOption() {
+  const firstGenreElement = document.createElement("option");
+  firstGenreElement.value = "any";
+  firstGenreElement.innerText = "All Genres";
+  document.querySelector("[data-search-genres]").appendChild(firstGenreElement);
+}
 
 for (const [id, name] of Object.entries(genres)) {
   const element = document.createElement("option");
@@ -58,14 +60,20 @@ for (const [id, name] of Object.entries(genres)) {
   genreHtml.appendChild(element);
 }
 
-/* The code below adds "All Authors" option to the "Author" dropdown menu */
 document.querySelector("[data-search-genres]").appendChild(genreHtml);
 
+/* The code below adds "All Authors" option to the "Author" dropdown menu */
+
 const authorsHtml = document.createDocumentFragment();
-const firstAuthorElement = document.createElement("option");
-firstAuthorElement.value = "any";
-firstAuthorElement.innerText = "All Authors";
-authorsHtml.appendChild(firstAuthorElement);
+
+function addAllAuthorsOption() {
+  const firstAuthorElement = document.createElement("option");
+  firstAuthorElement.value = "any";
+  firstAuthorElement.innerText = "All Authors";
+  document
+    .querySelector("[data-search-authors]")
+    .appendChild(firstAuthorElement);
+}
 
 for (const [id, name] of Object.entries(authors)) {
   const element = document.createElement("option");
@@ -73,6 +81,11 @@ for (const [id, name] of Object.entries(authors)) {
   element.innerText = name;
   authorsHtml.appendChild(element);
 }
+
+document.querySelector("[data-search-authors]").appendChild(authorsHtml);
+
+addAllGenresOption();
+addAllAuthorsOption();
 
 function setTheme(theme) {
   const darkColor = themeColour[theme].dark;
@@ -82,6 +95,16 @@ function setTheme(theme) {
   document.querySelector("[data-settings-theme]").value = theme;
 }
 
+/**
+ * Object representing theme colours
+ * @typedef {object} ThemeColour
+ * @property {string} dark
+ * @property {string} light
+ */
+
+/**
+ * @type {{night: ThemeColour, day: ThemeColour}}
+ */
 const themeColour = {
   night: {
     dark: "255, 255, 255",
@@ -92,32 +115,6 @@ const themeColour = {
     light: "255, 255, 255",
   },
 };
-
-/*const themeColour = {
-  night: {
-    dark: document.documentElement.style.setProperty(
-      "--color-dark",
-      "255, 255, 255"
-    ),
-    light: document.documentElement.style.setProperty(
-      "--color-light",
-      "10, 10, 20"
-    ),
-  },
-  day: {
-    dark: document.documentElement.style.setProperty(
-      "--color-dark",
-      "10, 10, 20"
-    ),
-    light: document.documentElement.style.setProperty(
-      "--color-light",
-      "255, 255, 255"
-    ),
-  },
-};
-*/
-
-document.querySelector("[data-search-authors]").appendChild(authorsHtml);
 
 /*the following code sets the preferred theme */
 let preferredTheme;
