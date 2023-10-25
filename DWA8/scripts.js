@@ -44,6 +44,7 @@ for (const { author, id, image, title } of matches.slice(0, BOOKS_PER_PAGE)) {
 itemsList.appendChild(starting);
 
 /* The code below adds "All Genres" option to the "Genre" dropdown menu */
+const genreHtml = document.createDocumentFragment();
 
 function addAllGenresOption() {
   const firstGenreElement = document.createElement("option");
@@ -52,7 +53,6 @@ function addAllGenresOption() {
   document.querySelector("[data-search-genres]").appendChild(firstGenreElement);
 }
 
-const genreHtml = document.createDocumentFragment();
 for (const [id, name] of Object.entries(genres)) {
   const element = document.createElement("option");
   element.value = id;
@@ -64,6 +64,8 @@ document.querySelector("[data-search-genres]").appendChild(genreHtml);
 
 /* The code below adds "All Authors" option to the "Author" dropdown menu */
 
+const authorsHtml = document.createDocumentFragment();
+
 function addAllAuthorsOption() {
   const firstAuthorElement = document.createElement("option");
   firstAuthorElement.value = "any";
@@ -73,7 +75,6 @@ function addAllAuthorsOption() {
     .appendChild(firstAuthorElement);
 }
 
-const authorsHtml = document.createDocumentFragment();
 for (const [id, name] of Object.entries(authors)) {
   const element = document.createElement("option");
   element.value = id;
@@ -277,35 +278,40 @@ showList.addEventListener("click", () => {
   page += 1;
 });
 
-/* display preview overlay of selectd book */
-itemsList.addEventListener("click", (event) => {
-  const pathArray = Array.from(event.path || event.composedPath());
-  let active = null;
+/* display preview overlay of selected book */
+function createClickHandler(books, authors) {
+  return function (event) {
+    const pathArray = Array.from(event.path || event.composedPath());
+    let active = null;
 
-  for (const node of pathArray) {
-    if (active) break;
+    for (const node of pathArray) {
+      if (active) break;
 
-    if (node?.dataset?.preview) {
-      let result = null;
+      if (node?.dataset?.preview) {
+        let result = null;
 
-      for (const singleBook of books) {
-        if (result) break;
-        if (singleBook.id === node?.dataset?.preview) result = singleBook;
+        for (const singleBook of books) {
+          if (result) break;
+          if (singleBook.id === node?.dataset?.preview) result = singleBook;
+        }
+
+        active = result;
       }
-
-      active = result;
     }
-  }
 
-  if (active) {
-    document.querySelector("[data-list-active]").open = true;
-    document.querySelector("[data-list-blur]").src = active.image;
-    document.querySelector("[data-list-image]").src = active.image;
-    document.querySelector("[data-list-title]").innerText = active.title;
-    document.querySelector("[data-list-subtitle]").innerText = `${
-      authors[active.author]
-    } (${new Date(active.published).getFullYear()})`;
-    document.querySelector("[data-list-description]").innerText =
-      active.description;
-  }
-});
+    if (active) {
+      document.querySelector("[data-list-active]").open = true;
+      document.querySelector("[data-list-blur]").src = active.image;
+      document.querySelector("[data-list-image]").src = active.image;
+      document.querySelector("[data-list-title]").innerText = active.title;
+      document.querySelector("[data-list-subtitle]").innerText = `${
+        authors[active.author]
+      } (${new Date(active.published).getFullYear()})`;
+      document.querySelector("[data-list-description]").innerText =
+        active.description;
+    }
+  };
+}
+
+const clickHandler = createClickHandler(books, authors);
+itemsList.addEventListener("click", clickHandler);
