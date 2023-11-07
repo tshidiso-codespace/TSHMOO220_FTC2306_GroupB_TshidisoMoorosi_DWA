@@ -41,14 +41,16 @@
             <sl-option>Counter 3</sl-option>
         </sl-select>
 
-        <sl-button variant="neutrak">Settings</sl-button>
+        <sl-button variant="primary" data-key="reset">Reset</sl-button>
+
+        <sl-button variant="neutral">Settings</sl-button>
     </aside>
 
     <main class="counter">
         <sl-input class="counter__value" data-key="number" readonly value="0"></sl-input>
         <div class="counter__actions">
-            <sl-button variant="primary" size="large" data-key="subtract" class="counter__button  counter__button_first">-</sl-button>
-            <sl-button variant="primary" size="large" data-key="add" class="counter__button">+</sl-button>
+            <sl-button variant="danger" size="large" data-key="subtract" class="counter__button  counter__button_first">-</sl-button>
+            <sl-button variant="success" size="large" data-key="add" class="counter__button">+</sl-button>
         </div>
     </main>
 

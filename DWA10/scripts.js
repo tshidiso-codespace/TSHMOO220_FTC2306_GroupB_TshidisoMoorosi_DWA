@@ -5,6 +5,7 @@ const elements = {
   number: document.querySelector('[data-key="number"]'),
   subtract: document.querySelector('[data-key="subtract"]'),
   add: document.querySelector('[data-key="add"]'),
+  reset: document.querySelector('[data-key="reset"]'),
 };
 
 const updateColor = () => {
@@ -50,6 +51,10 @@ const addHandler = () => {
   }
   updateColor();
 };
+
+elements.reset.addEventListener("click", () => {
+  elements.number.value = 0;
+});
 
 elements.subtract.addEventListener("click", subtractHandler);
 elements.add.addEventListener("click", addHandler);
