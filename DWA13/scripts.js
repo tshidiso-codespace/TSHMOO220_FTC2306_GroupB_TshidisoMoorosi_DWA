@@ -55,27 +55,3 @@ const filteredProducts = products.filter(
   (product) => product.product.length <= 5
 );
 console.log(filteredProducts);
-
-// Using both filter and map. Convert all prices that are strings to numbers,
-// and remove all products from the array that do not have prices.
-// After this has been done then use reduce to calculate the combined price of all remaining products.
-const combinedPrice = products
-  .filter((product) => product.price !== "" && !isNaN(Number(product.price)))
-  .map((product) => Number(product.price))
-  .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-console.log(combinedPrice);
-
-// Cncatenate all product names to create the following string.
-const concatenatedNames = products.reduce(
-  (accumulator, currentValue, index, array) => {
-    accumulator += currentValue.product;
-    if (index < array.length - 2) {
-      accumulator += ", ";
-    } else if (index === array.length - 2) {
-      accumulator += " and ";
-    }
-    return accumulator;
-  },
-  ""
-);
-console.log(concatenatedNames);
