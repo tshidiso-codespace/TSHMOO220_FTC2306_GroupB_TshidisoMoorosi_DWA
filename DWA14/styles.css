@@ -1,0 +1,9 @@
+.header {
+    text-align: center;
+}
+
+.header__title {
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--color-light-grey);
+}

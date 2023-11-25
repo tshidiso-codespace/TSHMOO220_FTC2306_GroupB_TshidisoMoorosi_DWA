@@ -20,7 +20,7 @@ names.forEach((name) => console.log(name));
 // Console log each name with a matching province.
 names.forEach((name, index) => console.log(`${name} (${provinces[index]})`));
 
-// Create a new array with map that has the amount of characters in each name.
+// Create a new array that has the amount of characters in each name.
 const nameLengths = names.map((name) => name.length);
 console.log(nameLengths);
 
