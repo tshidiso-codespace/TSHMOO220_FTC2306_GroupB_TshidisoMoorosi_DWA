@@ -1,22 +1,23 @@
-import {
-  LitElement,
-  html,
-  css,
-} from "https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js";
+// import {
+//   LitElement,
+//   html,
+//   css,
+// } from "https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js";
 
-const tree = html` <div>123<span>123</span></div> `;
-console.log(tree);
+// const tree = html` <div>123<span>123</span></div> `;
+// console.log(tree);
 
 export class MyElement extends LitElement {
   static styles = css`
     .header {
       text-align: center;
+      background-color: #424250;
     }
 
     .header__title {
       font-size: 3rem;
       font-weight: 900;
-      color: var(--color-light-grey);
+      color: #6a6a76;
     }
   `;
   render() {
@@ -37,7 +38,7 @@ export class Counter extends LitElement {
   }
   static styles = css`
     .counter {
-      background: var(--color-dark-grey);
+      background: #33333d;
     }
 
     .counter__value {
@@ -47,9 +48,9 @@ export class Counter extends LitElement {
       font-size: 8rem;
       font-weight: 900;
       background: none;
-      color: #000000;
+      color: #ffffff;
       border-width: 0;
-      border-bottom: 1px solid var(--color-light-grey);
+      border-bottom: 1px solid #6a6a76;
     }
 
     .counter__actions {
@@ -60,29 +61,30 @@ export class Counter extends LitElement {
       background: none;
       width: 50%;
       border-width: 0;
-      color: var(--color-white);
+      background-color: #424250;
+      color: #ffffff;
       font-size: 3rem;
       height: 10rem;
-      border-bottom: 1px solid var(--color-light-grey);
+      border-bottom: 1px solid #6a6a76;
       transition: transform 0.1s;
       transform: translateY(0);
     }
 
     .counter__button:active {
-      background: var(--color-medium-grey);
+      background: #424250;
       transform: translateY(2%);
     }
 
     .counter__button_first {
-      border-right: 1px solid var(--color-light-grey);
+      border-right: 1px solid #6a6a76;
     }
   `;
 
   constructor() {
     super();
     this.count = 0;
-    this.maxCount = 10; // Set your maximum count
-    this.minCount = -10; // Set your minimum count
+    this.maxCount = 15; // Set your maximum count
+    this.minCount = -15; // Set your minimum count
   }
 
   render() {
